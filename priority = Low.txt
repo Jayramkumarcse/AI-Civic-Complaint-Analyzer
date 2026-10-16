@@ -1,0 +1,18 @@
+priority = "Low"
+
+high_priority_words = [
+    "accident",
+    "hospital",
+    "emergency",
+    "fire",
+    "burst",
+    "death",
+    "injury"
+]
+
+for word in high_priority_words:
+    if word in complaint.lower():
+        priority = "High"
+        break
+
+st.warning(f"Priority: {priority}")
