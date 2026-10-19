@@ -1,67 +1,21 @@
-from app.priority_engine import get_priority
-from app.location_detector import extract_location
-import streamlit as st
-import joblib
-from textblob import TextBlob
-
-model = joblib.load("models/complaint_classifier.pkl")
-
-st.title("AI Civic Complaint Analyzer")
-
-complaint = st.text_area("Enter Complaint")
-
-if st.button("Analyze"):
-
-    category = model.predict([complaint])[0]
-
-probabilities = model.predict_proba([complaint])[0]
-confidence = max(probabilities) * 100
-st.success(f"Category: {category}")
-st.info(f"Confidence: {confidence:.2f}%")
-    polarity = TextBlob(complaint).sentiment.polarity
-
-    if polarity > 0:
-        sentiment = "Positive"
-    elif polarity < 0:
-        sentiment = "Negative"
-    else:
-        sentiment = "Neutral"
-
     st.success(f"Category: {category}")
+    st.info(f"Confidence: {confidence:.2f}%")
     st.info(f"Sentiment: {sentiment}")
-priority = "Low"
+    st.warning(f"Priority: {priority}")
+    st.write(f"Location: {location}")
 
-high_priority_words = [
-    "accident",
-    "hospital",
-    "emergency",
-    "fire",
-    "burst",
-    "death",
-    "injury"
-]
-priority = "Low"
+    new_row = pd.DataFrame([{
+        "complaint": complaint,
+        "category": category,
+        "priority": priority,
+        "location": location
+    }])
 
-high_priority_words = [
-    "accident",
-    "hospital",
-    "emergency",
-    "fire",
-    "burst",
-    "death",
-    "injury",
-    "leakage"
-]
+    new_row.to_csv(
+        "data/complaint_history.csv",
+        mode="a",
+        header=False,
+        index=False
+    )
 
-for word in high_priority_words:
-    if word in complaint.lower():
-        priority = "High"
-        break
-
-st.warning(f"Priority: {priority}")
-for word in high_priority_words:
-    if word in complaint.lower():
-        priority = "High"
-        break
-
-st.warning(f"Priority: {priority}")
+    st.success("Complaint saved successfully!")
