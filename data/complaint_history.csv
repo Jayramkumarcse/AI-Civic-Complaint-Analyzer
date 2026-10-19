@@ -1,3 +1,17 @@
 complaint,category,priority,location
 watter,Water,Low,Unknown
-Water leakage near hospital in Patna,Water,High,Patna
+Water leakage near hospital in Patna,Water,High,Patna"Road accident near hospital in Patna
+",Water,High,Patna
+Road accident near hospital in Patna,Road,High,Patna
+Road accident near bridge,Road,High,Unknown
+Electric pole sparking in Patna,Electricity,Low,Patna
+"Electric pole sparking in Patna, Sewage overflow in market",Electricity,Low,Patna
+"
+Sewage overflow in market",Sanitation,Low,Unknown
+"
+Water contamination in colony",Water,Low,Unknown
+"Road accident near flyover
+Water contamination in sector 8
+Garbage near school
+Power outage in market",Garbage,High,Unknown
+Road accident near flyover,Road,High,Unknown
